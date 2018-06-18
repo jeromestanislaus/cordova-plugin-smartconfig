@@ -5,7 +5,7 @@ It's a modified version of original code at https://github.com/xumingxin7398/cor
 
 # Install
 
-cordova plugin add https://github.com/IOCare/cordova-plugin-smartconfig.git
+cordova plugin add https://github.com/jeromestanislaus/cordova-plugin-smartconfig
 
 # Usage
 1. espSmartconfig.startConfig 
