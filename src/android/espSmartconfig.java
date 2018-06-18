@@ -75,7 +75,20 @@ public class espSmartconfig extends CordovaPlugin {
                         final int maxDisplayCount = taskResultCount;
                         if (firstResult.isSuc()) {
                              StringBuilder sb = new StringBuilder();
+                             JSONArray jsonArr = new JSONArray();
                              for (IEsptouchResult resultInList : resultList) {
+                               JSONObject jsonObj = new JSONObject();
+                               try {
+                                jsonObj.put("device", count);
+                                jsonObj.put("bssid", resultInList.getBssid());
+                                jsonObj.put("ip", resultInList.getInetAddress().getHostAddress());
+                                
+                                jsonArr.put(jsonObj);                                 
+                               }
+                               catch(JSONException ex) {
+                                 ex.printStackTrace();
+                               }
+
                             	 sb.append("device"+count+",bssid="
                             			 + resultInList.getBssid()
                             			 + ",InetAddress="
@@ -90,7 +103,7 @@ public class espSmartconfig extends CordovaPlugin {
                             	 sb.append("\nthere's " + (resultList.size() - count)
                             			 + " more resultList(s) without showing\n");
                              }
-                            PluginResult result = new PluginResult(PluginResult.Status.OK, "Finished: "+sb);
+                            PluginResult result = new PluginResult(PluginResult.Status.OK, jsonArr);
                             result.setKeepCallback(true);           // keep callback after this call
                             receivingCallbackContext.sendPluginResult(result);
                             //receivingCallbackContext.success("finished");
